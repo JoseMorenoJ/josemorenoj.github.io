@@ -136,10 +136,10 @@ All visible content lives in **`index.html`**. The page is divided into semantic
 ## Personal Information in the Site
 
 The site contains real personal contact details. Be careful when:
-- Logging or echoing file contents that may expose personal data (email, phone number).
+- Logging or echoing file contents that may expose personal data (email address).
 - Committing any changes that could inadvertently modify or remove contact information.
 
-Current contact details are in the footer section of `index.html`.
+Current contact details (email, LinkedIn, GitHub) are in the `#contact` section of `index.html`.
 
 ---
 
