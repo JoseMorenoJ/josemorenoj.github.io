@@ -12,7 +12,9 @@ There is **no build system, no package manager, and no server-side processing**.
 
 ```
 josemorenoj.github.io/
-├── index.html              # Entire website (single-page layout)
+├── index.html              # Main presentation page (About, Skills, Contact)
+├── portfolio.html          # Portfolio/accomplishments page
+├── experience.html         # Work history and education page
 ├── README.md               # Template credits and attribution
 ├── LICENSE.txt             # Creative Commons Attribution 3.0
 ├── .gitignore              # Generic C/C++ gitignore (template artifact)
@@ -57,27 +59,43 @@ josemorenoj.github.io/
 
 ---
 
-## Making Content Changes
+## Multi-Page Structure
 
-All visible content lives in **`index.html`**. The page is divided into semantic sections:
+The site is split across three HTML files. Each file is self-contained and shares the same `<head>`, sidebar `#header`, and `<script>` blocks (duplicated — no templating engine available).
 
-| Section ID / Class      | Content                                      |
-|-------------------------|----------------------------------------------|
-| `#header`               | Sidebar: name, avatar, navigation links      |
-| `#intro`                | About / personal summary                     |
-| `#one`                  | "Things I Can Do" — skills list              |
-| `#two`                  | "Accomplishments" — featured work gallery    |
-| `#three` (History)      | Work experience timeline                     |
-| `#four` (Diplomas)      | Education and certifications                 |
-| Contact form / footer   | Email, LinkedIn, GitHub, phone               |
+| File               | Sections                                              |
+|--------------------|-------------------------------------------------------|
+| `index.html`       | `#about`, `#things`, `#contact`, `#footer`            |
+| `portfolio.html`   | `#banner`, `#accomplishments`, `#footer`              |
+| `experience.html`  | `#banner`, `#history`, `#diplomas`, `#footer`         |
+
+**Contact section** (`#contact`) lives only in `index.html`. Nav links on `portfolio.html` and `experience.html` point to `index.html#contact`.
+
+### Navigation map
+
+| Nav item   | `index.html`       | `portfolio.html`     | `experience.html`    |
+|------------|--------------------|----------------------|----------------------|
+| About      | `#about`           | `index.html`         | `index.html`         |
+| Portfolio  | `portfolio.html`   | `#accomplishments`   | `portfolio.html`     |
+| Experience | `experience.html`  | `experience.html`    | `#history`           |
+| Education  | —                  | —                    | `#diplomas`          |
+| Contact    | `#contact`         | `index.html#contact` | `index.html#contact` |
+
+### Scroll-highlighting behaviour
+
+`main.js` wires up `scrollex` only for nav links whose `href` starts with `#` and matches an element on the current page. Cross-page links (e.g. `portfolio.html`) are ignored by scrollex automatically — the browser handles them as normal navigations.
 
 ### Editing workflow
 
-1. Open `index.html` in an editor.
-2. Locate the relevant `<section id="...">` block.
+1. Open the relevant HTML file in an editor.
+2. Locate the `<section id="...">` block to change.
 3. Make content edits.
-4. Test locally by opening `index.html` in a browser (no server needed).
+4. Test locally by opening the file in a browser (no server needed).
 5. Commit and push to `master` to deploy.
+
+### Keeping shared markup in sync
+
+The `#header` sidebar (avatar, name, nav) and the `<head>` / `<script>` blocks are duplicated across all three files. If you update one (e.g. add a social link to the sidebar footer), apply the same change to all three files.
 
 ---
 
@@ -146,7 +164,7 @@ Current contact details (email, LinkedIn, GitHub) are in the `#contact` section 
 ## Common Tasks
 
 ### Update work experience
-Edit the `<section id="three">` block in `index.html`. Each job entry follows this pattern:
+Edit the `<section id="history">` block in `experience.html`. Each job entry follows this pattern:
 ```html
 <div class="col-4 col-12-small">
   <h3>Job Title @ Company</h3>
@@ -155,7 +173,7 @@ Edit the `<section id="three">` block in `index.html`. Each job entry follows th
 ```
 
 ### Add a new accomplishment/project
-Edit the `<section id="two">` block. Use the existing `<article>` elements as a template:
+Edit the `<section id="accomplishments">` block in `portfolio.html`. Use the existing `<article>` elements as a template. Note: the `<a class="image">` wrapper has no `href` by design — there are no detail anchor pages.
 ```html
 <article>
   <a href="#" class="image"><img src="images/your-image.jpg" alt="" /></a>
@@ -167,7 +185,7 @@ Edit the `<section id="two">` block. Use the existing `<article>` elements as a 
 ```
 
 ### Update education/certifications
-Edit the `<section id="four">` (Diplomas) block. Follow the existing entry format.
+Edit the `<section id="diplomas">` block in `experience.html`. Follow the existing entry format.
 
 ### Change profile photo
 Replace `images/avatar.jpg` (keep the same filename) or update the `src` attribute in the `#header` section:
