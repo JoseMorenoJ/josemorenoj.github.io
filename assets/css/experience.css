@@ -1,0 +1,47 @@
+/*
+ * Experience page color scheme
+ * Overrides the default teal (#4acaa8) with amber (#c47a3a).
+ * To swap to a different colour, replace every #c47a3a below.
+ */
+
+/* Sidebar background */
+#header {
+    background: #c47a3a;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* "Engineer" subtitle and header paragraph */
+#header header p,
+#header > header p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Sidebar links (default/rest state) */
+#header a {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Social icon links in sidebar footer */
+#header > footer .icons li a {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Divider lines between nav items */
+#header > nav ul li {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Active nav item — shown on white pill background */
+#header > nav ul li a.active {
+    color: #c47a3a !important;
+}
+
+/* Mobile hamburger button */
+#titleBar .toggle:before {
+    background: #c47a3a;
+}
+
+/* Link hover colour in page content */
+a:hover {
+    color: #c47a3a !important;
+}
